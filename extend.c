@@ -5,13 +5,26 @@
 ** Login   <pera_s@epitech.net>
 **
 ** Started on  Mon Feb 15 21:56:11 2016 simon pera
-** Last update Thu Feb 18 00:47:48 2016 simon pera
+** Last update Fri Feb 19 20:31:15 2016 simon pera
 */
 
 #include <unistd.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include "my.h"
+
+void	error(t_pp *pp)
+{
+  int	i;
+
+  i = 0;
+  while (pp->buf[i] != '\0')
+    {
+      if (pp->buf[i] < 48 && pp->buf[i] > 57)
+	my_putstr("Error: invalid input (positive number expected)\n");
+      i++;
+    }
+}
 
 void	verif(t_pp *pp)
 {
@@ -49,23 +62,9 @@ void	ai(t_pp *pp)
   suiv(pp);
 }
 
-int	extend(t_pp *pp)
+void	extend(t_pp *pp)
 {
-  pp->line = 0;
-  pp->nb_matches = 0;
-  if (pp->i != 0)
-    {
-      my_putstr("Your turn:\n");
-      my_putstr("Line: ");
-      read(0, pp->buf, 4096);
-      pp->line = my_getnbr(pp->buf);
-      my_putstr("Matches: ");
-      read(0, pp->buf, 4096);
-      pp->nb_matches = my_getnbr(pp->buf);
-      verif(pp);
-      suiv(pp);
-    }
-  else
-    print_updated_board_game(pp);
-  return (0);
+  pp->nb_matches = pp->line = pp->flag = 0;
+  line(pp);
+  matches(pp);
 }

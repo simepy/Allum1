@@ -5,7 +5,7 @@
 ** Login   <pera_s@epitech.net>
 **
 ** Started on  Wed Feb 10 14:19:24 2016 simon pera
-** Last update Thu Feb 18 00:48:35 2016 simon pera
+** Last update Fri Feb 19 21:42:09 2016 simon pera
 */
 
 #include <unistd.h>
@@ -113,7 +113,7 @@ int		main()
       else if ((pp->i % 2) == 1 && pp->i >= 1)
 	ai(pp);
       else
-	extend(pp);
+	print_updated_board_game(pp);
       pp->i++;
     }
 }

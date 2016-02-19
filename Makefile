@@ -5,11 +5,12 @@
 ## Login   <pera_s@epitech.net>
 ##
 ## Started on  Mon Oct 12 15:00:05 2015 simon pera
-## Last update Wed Feb 17 16:47:48 2016 simon pera
+## Last update Thu Feb 18 21:56:11 2016 simon pera
 ##
 
 SRC	= allum1.c \
-	  extend.c
+	  extend.c \
+	  ft.c
 
 OBJ	= $(SRC:.c=.o)
 
