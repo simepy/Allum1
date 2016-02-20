@@ -5,7 +5,7 @@
 ** Login   <pera_s@epitech.net>
 **
 ** Started on  Mon Feb 15 21:56:11 2016 simon pera
-** Last update Fri Feb 19 20:31:15 2016 simon pera
+** Last update Sat Feb 20 18:30:59 2016 simon pera
 */
 
 #include <unistd.h>
@@ -14,7 +14,7 @@
 #include "my.h"
 
 void	error(t_pp *pp)
-{
+ {
   int	i;
 
   i = 0;
@@ -56,8 +56,25 @@ void	suiv(t_pp *pp)
 
 void	ai(t_pp *pp)
 {
+  int	i;
+
+  i = pp->line = pp->nb_matches = 0;
   my_putstr("AI's turn...\n");
-  pp->line = pp->nb_matches = 1;
+  while (pp->line == 0)
+    pp->line = (rand() % (pp->li + 1));
+  while (pp->nb_matches == 0)
+    pp->nb_matches = (rand() % ((pp->line * 2) - 1));
+  while (pp->tab[pp->line][pp->nb_matches] != '|')
+    {
+      pp->nb_matches = (rand() % ((pp->line * 2) - 1));
+      if (i == ((pp->line * 2) - 1))
+	{
+	  while (pp->line != 0)
+	    pp->line = (rand() % (pp->li + 1));
+	}
+      i = 0;
+      i++;
+    }
   verif(pp);
   suiv(pp);
 }
