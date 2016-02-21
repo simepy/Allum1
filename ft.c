@@ -5,7 +5,7 @@
 ** Login   <pera_s@epitech.net>
 **
 ** Started on  Thu Feb 18 21:44:18 2016 simon pera
-** Last update Sat Feb 20 18:24:34 2016 simon pera
+** Last update Sun Feb 21 20:19:26 2016 simon pera
 */
 
 #include <unistd.h>
@@ -34,20 +34,24 @@ int	moins(t_pp *pp)
 
 void	verif_line(t_pp *pp)
 {
-  while(pp->ver1 != 1 || pp->ver2 != 1)
+  while(pp->ver1 != 1 || pp->ver2 != 1 || pp->ver3 != 1)
     {
       moins(pp);
       if (pp->ver1 != 0)
 	{
-	  if ((pp->buf[0] == '0') || (my_getnbr(pp->buf) > pp->li))
+	  pp->v = my_getnbr(pp->buf);
+	  if ((pp->buf[0] == '0') || (pp->v > pp->li))
 	    {
 	      my_putstr("Error: this line is out of range\n");
 	      pp->ver2 = 0;
 	    }
 	  else
-	    pp->ver2 = 1;
+	    {
+	      pp->ver3 = verif_len(pp);
+	      pp->ver2 = 1;
+	    }
 	}
-      if (pp->ver1 == 0 || pp->ver2 == 0)
+      if (pp->ver1 == 0 || pp->ver2 == 0 || pp->ver3 == 0)
 	{
 	  my_putstr("Line: ");
 	  read(0, pp->buf, 4096);
@@ -79,8 +83,12 @@ void	verif_matches(t_pp *pp)
 	      my_putstr("Error: you have to remove at least one match\n");
 	      pp->ver2 = 0;
 	    }
-	  else if ((pp->li == 1 && pp->v > 1) || (pp->v > ((pp->line * 2) - 1)))
-	    my_putstr("Error: not enough matches on this line\n");
+	  else if ((pp->li == 1 && pp->v > 1) ||
+		   (pp->v > ((pp->line * 2) - 1)))
+	    {
+	      my_putstr("Error: not enough matches on this line\n");
+	      pp->ver2 = 0;
+	    }
 	  else
 	    pp->ver2 = 1;
 	}
@@ -102,6 +110,6 @@ void	matches(t_pp *pp)
   verif_matches(pp);
   pp->ver1 = pp->ver2 = 0;
   pp->nb_matches = my_getnbr(pp->buf);
-  verif(pp);
+  choice(pp);
   suiv(pp);
 }

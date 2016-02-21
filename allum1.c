@@ -5,7 +5,7 @@
 ** Login   <pera_s@epitech.net>
 **
 ** Started on  Wed Feb 10 14:19:24 2016 simon pera
-** Last update Fri Feb 19 21:42:09 2016 simon pera
+** Last update Sun Feb 21 18:20:04 2016 simon pera
 */
 
 #include <unistd.h>
@@ -83,7 +83,7 @@ void	print_updated_board_game(t_pp *pp)
     return ;
   while (pp->i++ < pp->li)
     {
-      pp->tab[pp->i] = malloc(sizeof(char) * ((pp->li * 2) + 1));
+      pp->tab[pp->i] = malloc(sizeof(char) * ((pp->li * 2)));
       while (pp->z++ < pp->rap);
       while (pp->z <= pp->toto)
 	pp->tab[pp->i][pp->z++] = '|';
@@ -103,17 +103,21 @@ int		main()
   t_pp		*pp;
 
   if ((pp = malloc(sizeof(t_pp))) &&
-      (pp->buf = malloc(sizeof(char) * 4097))== NULL)
+      (pp->buf = malloc(sizeof(char) * 4097)) == NULL)
     return (0);
   pp->i = pp->line = pp->nb_matches = pp->flag = 0;
-  while (42)
+  pp->flag2 = 0;
+  while (pp->flag2 != 1)
     {
+      pp->ia = pp->player = 0;
       if ((pp->i % 2) == 0 && pp->i >= 1)
 	extend(pp);
       else if ((pp->i % 2) == 1 && pp->i >= 1)
 	ai(pp);
       else
 	print_updated_board_game(pp);
+      pp->flag2 = verif(pp);
       pp->i++;
     }
+  end(pp);
 }

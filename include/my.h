@@ -5,7 +5,7 @@
 ** Login   <pera_s@epitech.net>
 **
 ** Started on  Fri Oct  9 14:37:12 2015 simon pera
-** Last update Fri Feb 19 23:29:22 2016 simon pera
+** Last update Sun Feb 21 20:07:41 2016 simon pera
 */
 
 #ifndef MY_H_
@@ -35,8 +35,14 @@ typedef struct	s_pp
   int	ver1;
   int	ver2;
   int	v;
+  int	flag2;
+  int	ia;
+  int	player;
+  int	ver3;
+  int	x;
 }		t_pp;
 
+void	verif_ai(t_pp *pp);
 void	my_putchar(char);
 int	my_put_nbr(int);
 int	my_swap(int, int);
@@ -52,7 +58,7 @@ int	my_strncmp(char *, char *, int);
 char	**my_str_to_wordtab(char *, int );
 void     extend(t_pp *);
 void    print_updated_board_game(t_pp *);
-void    verif(t_pp *);
+void    choice(t_pp *);
 void    ai(t_pp *);
 void    tab_maxi(int, char **, int, int);
 void	up_down(int );
@@ -60,5 +66,8 @@ void	line(t_pp *);
 void	matches(t_pp *);
 void	error(t_pp *);
 void	suiv(t_pp *);
+int	verif(t_pp *);
+void	end(t_pp *);
+int	verif_len(t_pp *);
 
 #endif /* MY_H_ */
